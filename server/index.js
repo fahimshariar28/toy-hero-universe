@@ -35,6 +35,92 @@ async function run() {
       .db("toy-hero")
       .collection("toy-hero-collection");
 
+    //   Routes
+
+    // get all toys data limit 20
+    app.get("/toys", async (req, res) => {
+      const limit = 20;
+      const cursor = toyHeroCollection.find({}).limit(limit);
+      const toys = await cursor.toArray();
+      res.send(toys);
+    });
+
+    //searching by name
+    app.get("/search/:text", async (req, res) => {
+      const searchText = req.params.text;
+      const result = await toyHeroCollection
+        .find({ toyName: { $regex: searchText, $options: "i" } })
+        .toArray();
+      res.send(result);
+    });
+
+    // get some toy data by email
+    app.get("/mytoys", async (req, res) => {
+      const email = req.query.email;
+      const query = { email: email };
+      const cursor = toyHeroCollection.find(query);
+      const myToys = await cursor.toArray();
+      myToys.forEach((toy) => {
+        toy.price = parseFloat(toy.price);
+      });
+      // Sort by price in ascending order
+      myToys.sort((a, b) => a.price - b.price);
+      res.send(myToys);
+    });
+
+    // get single toy data by id
+    app.get("/mytoys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const toy = await toyHeroCollection.findOne(query);
+      res.json(toy);
+    });
+
+    // get toy data by category
+    app.get("/toys/:category", async (req, res) => {
+      const category = req.params.category;
+      const query = { toyCategory: category };
+      const cursor = toyHeroCollection.find(query);
+      const toys = await cursor.toArray();
+      res.send(toys);
+    });
+
+    // Create or post  a single new toy
+    app.post("/addToy", async (req, res) => {
+      const newToy = req.body;
+      const result = await toyHeroCollection.insertOne(newToy);
+      res.send(result);
+    });
+
+    // update single toy data by id
+    app.put("/mytoys/:id", async (req, res) => {
+      const id = req.params.id;
+      const updatedToy = req.body;
+      const filter = { _id: new ObjectId(id) };
+      const options = { upsert: true };
+      const updateDoc = {
+        $set: {
+          price: updatedToy.price,
+          Quantity: updatedToy.Quantity,
+          description: updatedToy.description,
+        },
+      };
+      const result = await toyHeroCollection.updateOne(
+        filter,
+        updateDoc,
+        options
+      );
+      res.json(result);
+    });
+
+    // delete single toy data by id
+    app.delete("/mytoys/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: new ObjectId(id) };
+      const result = await toyHeroCollection.deleteOne(query);
+      res.json(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(
