@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+.active{
+  @apply tracking-wide text-yellow-500  hover:underline
+  bg-[#dbeafe] font-bold text-lg 
+}
+
+.btn-main{
+  @apply bg-[#FFC107] border-none text-black text-xl font-bold hover:bg-[#DC143C] hover:text-white normal-case 
+}
+
+.link-color {
+
+  @apply text-yellow-700 hover:text-red-600
+}
