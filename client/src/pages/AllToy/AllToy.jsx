@@ -23,7 +23,7 @@ const AllToy = () => {
 
     // console.log(search);
 
-    fetch(`https://toy-hero-universe-server.vercel.app/search/${search}`)
+    fetch(`http://localhost:5000/search/${search}`)
       .then((res) => res.json())
       .then((data) => {
         setToys(data);
