@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../../provider/AuthProvider";
 import LoadingSpinner from "../../../loader/LoadingSpinner";
 import useTitle from "../../../hooks/useTitle";
+import Banner from "./../Banner/Banner";
 
 const Home = () => {
   useTitle("Home");
@@ -15,7 +16,7 @@ const Home = () => {
   }
   return (
     <>
-      <h1 className="text-center text-4xl font-bold my-5">Home</h1>
+      <Banner></Banner>
     </>
   );
 };
