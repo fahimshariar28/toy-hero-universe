@@ -6,6 +6,7 @@ import Banner from "./../Banner/Banner";
 import Gallary from "../Gallary/Gallary";
 import ShopByCategory from "./../shopByCategory/ShopByCategory";
 import Brand from "../Brand/Brand";
+import OurServices from "../OurServices/OurServices";
 
 const Home = () => {
   useTitle("Home");
@@ -23,6 +24,7 @@ const Home = () => {
       <Gallary></Gallary>
       <ShopByCategory></ShopByCategory>
       <Brand></Brand>
+      <OurServices></OurServices>
     </>
   );
 };
