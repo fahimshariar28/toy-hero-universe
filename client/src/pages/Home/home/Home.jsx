@@ -4,6 +4,7 @@ import LoadingSpinner from "../../../loader/LoadingSpinner";
 import useTitle from "../../../hooks/useTitle";
 import Banner from "./../Banner/Banner";
 import Gallary from "../Gallary/Gallary";
+import ShopByCategory from "./../shopByCategory/ShopByCategory";
 
 const Home = () => {
   useTitle("Home");
@@ -19,6 +20,7 @@ const Home = () => {
     <>
       <Banner></Banner>
       <Gallary></Gallary>
+      <ShopByCategory></ShopByCategory>
     </>
   );
 };
