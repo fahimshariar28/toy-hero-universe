@@ -14,7 +14,9 @@ const MyToys = () => {
   //fetch my toys data by email
 
   useEffect(() => {
-    fetch(`http://localhost:5000/mytoys?email=${user?.email}`)
+    fetch(
+      `https://toy-hero-universe-server-nine.vercel.app/mytoys?email=${user?.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         setMyToys(data);
@@ -35,7 +37,7 @@ const MyToys = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/mytoys/${id}`, {
+        fetch(`https://toy-hero-universe-server-nine.vercel.app/mytoys/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

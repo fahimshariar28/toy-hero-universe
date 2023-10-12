@@ -12,7 +12,7 @@ const ToyDetails = () => {
   //  fetch single toy from database
 
   useEffect(() => {
-    fetch(`http://localhost:5000/mytoys/${id}`)
+    fetch(`https://toy-hero-universe-server-nine.vercel.app/mytoys/${id}`)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
